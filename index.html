@@ -974,10 +974,10 @@
           </div>
           <div class="content">
             <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Simulador online</span></div>
-            <h3>Laboratório de Circuitos</h3>
+            <h3>Laboratório de Hidrostática Empuxo</h3>
             <p>Monte circuitos simples e visualize tensão, corrente, resistência e potência elétrica.</p>
             <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-circuitos" placeholder="videos/simulador-circuitos.mp4" /><button onclick="updateCardVideo('preview-circuitos','video-circuitos')">Aplicar</button></div></div>
-            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Laboratório de Circuitos', true)">Abrir simulador</button></div>
+            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Hidrostática', true)">Abrir simulador</button></div>
           </div>
         </article>
 
@@ -1329,9 +1329,16 @@
     }
 
     function openSimulator(resourceName, premium) {
-      if (!checkAccess(premium)) return;
+      //if (!checkAccess(premium)) return;
 
-      alert('Abrindo simulador online: ' + resourceName + '. Em uma versão real, este botão levaria para a página do aplicativo web hospedado no site.');
+      if(resourceName=="Hidrostática"){
+
+      //  alert('Simulador de hidrostática: ajuste o peso, volume e tipo de líquido para ver o empuxo. Em uma versão real, este botão abriria o simulador interativo hospedado no site.');
+       // alert('Abrindo simulador de hidrostática: ajuste o peso, volume e tipo de líquido para ver o empuxo. Em uma versão real, este botão abriria o simulador interativo hospedado no site.');
+        window.open('hidrostatica_empuxo.html', '_blank');
+      }
+
+    //  alert('Abrindo simulador online: ' + resourceName + '. Em uma versão real, este botão levaria para a página do aplicativo web hospedado no site.');
     }
 
     function downloadResource(resourceName, premium) {
