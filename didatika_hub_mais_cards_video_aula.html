@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Didatika Hub | Recursos Digitais para Professores</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --blue: #1769ff;
+      --blue-dark: #0b2f6b;
+      --cyan: #02c8ff;
+      --orange: #ff9f1c;
+      --green: #00b894;
+      --purple: #6c5ce7;
+      --pink: #e84393;
+      --bg: #f4f8ff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --card: #ffffff;
+      --line: #e2e8f0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(18px);
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--blue-dark);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 10px 25px rgba(23,105,255,0.32);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    nav a {
+      color: #334155;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .login-pill {
+      background: var(--blue);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      padding: 70px 7% 50px;
+      background:
+        radial-gradient(circle at top left, rgba(2,200,255,0.25), transparent 35%),
+        radial-gradient(circle at top right, rgba(255,159,28,0.22), transparent 35%),
+        linear-gradient(135deg, #ffffff, #eaf3ff);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e0f2fe;
+      color: #075985;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.02;
+      color: var(--blue-dark);
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #475569;
+      line-height: 1.65;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .search-box {
+      background: white;
+      padding: 12px;
+      border-radius: 22px;
+      display: flex;
+      gap: 10px;
+      max-width: 680px;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+      border: 1px solid #dbeafe;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      padding: 0 14px;
+      color: var(--text);
+    }
+
+    .btn {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 15px;
+      transition: 0.25s;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 10px 25px rgba(23,105,255,0.24);
+    }
+
+    .btn-orange {
+      background: var(--orange);
+      color: #1f2937;
+      box-shadow: 0 10px 25px rgba(255,159,28,0.28);
+    }
+
+    .btn-light {
+      background: #eef6ff;
+      color: var(--blue-dark);
+    }
+
+    .hero-panel {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid #dbeafe;
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: 0 28px 70px rgba(23,105,255,0.16);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(2,200,255,0.18);
+      right: -55px;
+      top: -55px;
+    }
+
+    .panel-card {
+      position: relative;
+      background: white;
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid #e2e8f0;
+    }
+
+    .panel-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 27px;
+      color: white;
+    }
+
+    .bg-blue { background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+    .bg-orange { background: linear-gradient(135deg, #ff9f1c, #ffcf56); }
+    .bg-purple { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+    .bg-green { background: linear-gradient(135deg, #00b894, #55efc4); }
+    .bg-pink { background: linear-gradient(135deg, #e84393, #fd79a8); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 44px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 25px rgba(15,23,42,0.05);
+    }
+
+    .stat strong {
+      font-size: 30px;
+      color: var(--blue-dark);
+      display: block;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    section {
+      padding: 72px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 38px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 34px;
+    }
+
+    .action-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .action-card:hover {
+      transform: translateY(-6px);
+      border-color: #93c5fd;
+    }
+
+    .action-card .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      font-size: 28px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .action-card h3 {
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+      font-size: 21px;
+    }
+
+    .action-card p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .filter-btn {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid #bfdbfe;
+      background: white;
+      color: var(--blue-dark);
+      cursor: pointer;
+      font-weight: 900;
+      box-shadow: 0 6px 16px rgba(15,23,42,0.04);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--blue);
+      color: white;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .resource-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 16px 38px rgba(15,23,42,0.08);
+      transition: 0.25s;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 22px 55px rgba(15,23,42,0.13);
+    }
+
+    .thumb {
+      height: 165px;
+      padding: 22px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb::after {
+      content: '';
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      right: -48px;
+      bottom: -55px;
+    }
+
+    .thumb-emoji {
+      font-size: 54px;
+      z-index: 1;
+    }
+
+    .level {
+      z-index: 1;
+      background: rgba(255,255,255,0.22);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+
+
+    .video-thumb {
+      padding: 0;
+      min-height: 185px;
+      align-items: stretch;
+      background: #071a38;
+    }
+
+    .video-thumb video {
+      width: 100%;
+      height: 100%;
+      min-height: 185px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.82;
+      position: relative;
+      z-index: 1;
+    }
+
+    .video-thumb video.video-error {
+      display: none;
+    }
+
+    .video-thumb .video-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(2,200,255,0.55), transparent 24%),
+        radial-gradient(circle at 85% 75%, rgba(255,159,28,0.35), transparent 24%),
+        linear-gradient(135deg, #0b2f6b, #1769ff 48%, #02c8ff);
+      animation: previewMove 5s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    .video-thumb.ar-preview .video-fallback {
+      background:
+        radial-gradient(circle at 18% 24%, rgba(232,67,147,0.55), transparent 25%),
+        radial-gradient(circle at 84% 70%, rgba(2,200,255,0.45), transparent 24%),
+        linear-gradient(135deg, #31105f, #6c5ce7 46%, #e84393);
+    }
+
+    .preview-scene {
+      width: 78%;
+      height: 68%;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.11);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 28px rgba(255,255,255,0.16);
+    }
+
+    .preview-scene::before {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.45);
+    }
+
+    .preview-object {
+      position: absolute;
+      left: 16%;
+      bottom: 23%;
+      font-size: 42px;
+      animation: floatObject 2.8s ease-in-out infinite;
+    }
+
+    .preview-chart {
+      position: absolute;
+      right: 13%;
+      bottom: 22%;
+      width: 76px;
+      height: 48px;
+      border-left: 3px solid rgba(255,255,255,0.9);
+      border-bottom: 3px solid rgba(255,255,255,0.9);
+    }
+
+    .preview-chart::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      bottom: 8px;
+      width: 58px;
+      height: 26px;
+      border-top: 4px solid #fff;
+      border-right: 4px solid #fff;
+      transform: skew(-24deg);
+    }
+
+    .ar-cube {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 64px;
+      height: 64px;
+      transform: translate(-50%, -50%) rotate(45deg);
+      border: 3px solid rgba(255,255,255,0.95);
+      box-shadow: 0 0 24px rgba(255,255,255,0.7), inset 0 0 18px rgba(2,200,255,0.5);
+      animation: spinCube 3.2s linear infinite;
+    }
+
+    .ar-scan {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      height: 4px;
+      top: 22%;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 18px rgba(255,255,255,0.9);
+      animation: scanLine 2.4s ease-in-out infinite;
+    }
+
+    .video-label {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(7,26,56,0.72);
+      color: white;
+      font-size: 12px;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+    }
+
+    .video-thumb .level {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+    }
+
+    @keyframes previewMove {
+      from { transform: scale(1); filter: hue-rotate(0deg); }
+      to { transform: scale(1.05); filter: hue-rotate(10deg); }
+    }
+
+    @keyframes floatObject {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(46px) translateY(-12px); }
+    }
+
+    @keyframes spinCube {
+      from { transform: translate(-50%, -50%) rotate(45deg) scale(0.9); }
+      to { transform: translate(-50%, -50%) rotate(405deg) scale(1.06); }
+    }
+
+    @keyframes scanLine {
+      0%, 100% { top: 22%; opacity: 0.45; }
+      50% { top: 78%; opacity: 1; }
+    }
+    .content {
+      padding: 24px;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .tag.premium {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .tag.free {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .resource-card h3 {
+      color: var(--blue-dark);
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .resource-card p {
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+
+    .video-url-box {
+      background: #f8fbff;
+      border: 1px dashed #bfdbfe;
+      border-radius: 16px;
+      padding: 12px;
+      margin: 0 0 14px;
+    }
+
+    .video-url-box label {
+      display: block;
+      color: var(--blue-dark);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .video-url-box div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+    }
+
+    .video-url-box input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 11px;
+      outline: none;
+      font-size: 13px;
+    }
+
+    .video-url-box input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(23,105,255,0.12);
+    }
+
+    .video-url-box button {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: var(--blue-dark);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .plans {
+      background:
+        radial-gradient(circle at left, rgba(23,105,255,0.15), transparent 30%),
+        #eef5ff;
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      border: 1px solid #dbeafe;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.08);
+      text-align: center;
+      position: relative;
+    }
+
+    .plan-card.featured {
+      border: 3px solid var(--blue);
+      transform: scale(1.03);
+    }
+
+    .popular {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 900;
+      color: #1f2937;
+    }
+
+    .price {
+      font-size: 40px;
+      font-weight: 950;
+      color: var(--blue-dark);
+      margin: 18px 0;
+    }
+
+    .plan-card ul {
+      list-style: none;
+      margin: 24px 0;
+      text-align: left;
+    }
+
+    .plan-card li {
+      padding: 11px 0;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+      font-weight: 650;
+    }
+
+    .teacher-area {
+      background: white;
+      border-radius: 32px;
+      padding: 36px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.08);
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .teacher-area h2 {
+      color: var(--blue-dark);
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .teacher-area p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .login-box {
+      background: #f8fbff;
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px solid #dbeafe;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .login-box input:focus {
+      border-color: var(--blue);
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 13px;
+      border-radius: 14px;
+      background: #dbeafe;
+      color: var(--blue-dark);
+      font-weight: 800;
+      display: none;
+    }
+
+    footer {
+      background: #071a38;
+      color: white;
+      padding: 44px 7%;
+      text-align: center;
+    }
+
+    footer p {
+      color: #cbd5e1;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-grid,
+      .teacher-area {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">✦</div>
+      Didatika Hub
+    </div>
+    <nav>
+      <a href="#biblioteca">Biblioteca</a>
+      <a href="#simuladores">Simuladores</a>
+      <a href="#professores">Professores</a>
+      <a href="#planos">Planos</a>
+      <a href="#app-ra">App RA</a>
+      <a href="#login" class="login-pill">Entrar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">🚀 Plataforma premium para educadores</div>
+          <h1>Simuladores, aulas prontas e materiais digitais em um só lugar.</h1>
+          <p>
+            Uma biblioteca moderna para professores encontrarem recursos interativos, apresentações em PowerPoint,
+            vídeo aulas, roteiros de aula e materiais práticos para aplicar diretamente com os alunos.
+          </p>
+
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar por física, geometria, química, programação..." onkeyup="searchResources()" />
+            <button class="btn btn-blue" onclick="searchResources()">Buscar</button>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-card">
+            <div class="panel-icon bg-blue">🧪</div>
+            <div>
+              <h3>Simuladores online</h3>
+              <p>Aplicativos web hospedados no próprio site.</p>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="panel-icon bg-orange">📊</div>
+            <div>
+              <h3>PowerPoint pronto</h3>
+              <p>Apresentações editáveis para usar em sala.</p>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="panel-icon bg-purple">🧩</div>
+            <div>
+              <h3>Atividades práticas</h3>
+              <p>Imagens, moldes e materiais para montar.</p>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="panel-icon bg-green">🎬</div>
+            <div>
+              <h3>Vídeo aulas e roteiros</h3>
+              <p>Sequências didáticas com orientação pedagógica.</p>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="panel-icon bg-pink">📱</div>
+            <div>
+              <h3>Aplicativo RA</h3>
+              <p>Baixe o app para usar simuladores em realidade aumentada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong>120+</strong><span>recursos didáticos</span></div>
+        <div class="stat"><strong>35+</strong><span>simuladores web</span></div>
+        <div class="stat"><strong>80+</strong><span>aulas e roteiros</span></div>
+        <div class="stat"><strong>24h</strong><span>acesso online</span></div>
+      </div>
+    </section>
+
+    <section id="biblioteca">
+      <div class="section-title">
+        <h2>Escolha o tipo de recurso</h2>
+        <p>Organize sua aula por categoria: simulação online, apresentação, atividade prática, vídeo, roteiro ou aplicativo de realidade aumentada.</p>
+      </div>
+
+      <div class="quick-actions">
+        <div class="action-card" onclick="filterCards('simulador', this)">
+          <div class="icon bg-blue">🧪</div>
+          <h3>Abrir simuladores</h3>
+          <p>Os simuladores são aplicativos web hospedados na plataforma. O aluno acessa direto pelo navegador.</p>
+        </div>
+
+        <div class="action-card" onclick="filterCards('powerpoint', this)">
+          <div class="icon bg-orange">📊</div>
+          <h3>Baixar PowerPoint</h3>
+          <p>Apresentações criadas no PowerPoint para editar, adaptar e usar nas aulas.</p>
+        </div>
+
+        <div class="action-card" onclick="filterCards('pratica', this)">
+          <div class="icon bg-purple">🧩</div>
+          <h3>Atividades práticas</h3>
+          <p>Materiais como imagens, moldes e recortes para alunos montarem sólidos geométricos.</p>
+        </div>
+
+        <div class="action-card" onclick="filterCards('roteiro', this)">
+          <div class="icon bg-green">📘</div>
+          <h3>Roteiros de aula</h3>
+          <p>Sequências didáticas com objetivos, metodologia, tempo, avaliação e orientações.</p>
+        </div>
+
+        <div class="action-card" onclick="filterCards('app-ra', this)">
+          <div class="icon bg-pink">📱</div>
+          <h3>Baixar aplicativo RA</h3>
+          <p>Aplicativo para celular com simuladores em realidade aumentada para usar com cards educativos.</p>
+        </div>
+      </div>
+
+      <div class="filters" id="simuladores">
+        <button class="filter-btn active" onclick="filterCards('todos', this)">Todos</button>
+        <button class="filter-btn" onclick="filterCards('simulador', this)">Simuladores online</button>
+        <button class="filter-btn" onclick="filterCards('powerpoint', this)">PowerPoint</button>
+        <button class="filter-btn" onclick="filterCards('pratica', this)">Atividades práticas</button>
+        <button class="filter-btn" onclick="filterCards('video', this)">Vídeo aula</button>
+        <button class="filter-btn" onclick="filterCards('roteiro', this)">Roteiros</button>
+        <button class="filter-btn" onclick="filterCards('app-ra', this)">App RA</button>
+      </div>
+
+      <div class="cards" id="resourceCards">
+        <article class="resource-card" data-category="simulador" data-title="simulador movimento velocidade física carro gráfico">
+          <div class="thumb video-thumb bg-blue" id="preview-movimento">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-movimento.jpg">
+              <source src="videos/simulador-movimento.mp4" type="video/mp4" />
+            </video>
+            <div class="video-fallback"><div class="preview-scene"><div class="preview-object">🚗</div><div class="preview-chart"></div></div></div>
+            <div class="video-label">Prévia do simulador</div><div class="level">Física</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Simulador online</span></div>
+            <h3>Movimento e Velocidade</h3>
+            <p>Aplicativo web para estudar posição, distância, tempo, velocidade e gráficos do movimento.</p>
+            <div class="video-url-box">
+              <label>Inserir vídeo de prévia</label>
+              <div><input type="text" id="video-movimento" placeholder="videos/simulador-movimento.mp4 ou link .mp4" /><button onclick="updateCardVideo('preview-movimento','video-movimento')">Aplicar</button></div>
+            </div>
+            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Movimento e Velocidade', true)">Abrir simulador</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="simulador" data-title="simulador circuitos lei de ohm eletricidade resistência tensão corrente">
+          <div class="thumb video-thumb bg-blue" id="preview-circuitos">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-circuitos.jpg"><source src="videos/simulador-circuitos.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="preview-object">⚡</div><div class="preview-chart"></div></div></div>
+            <div class="video-label">Prévia do simulador</div><div class="level">Física</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Simulador online</span></div>
+            <h3>Laboratório de Circuitos</h3>
+            <p>Monte circuitos simples e visualize tensão, corrente, resistência e potência elétrica.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-circuitos" placeholder="videos/simulador-circuitos.mp4" /><button onclick="updateCardVideo('preview-circuitos','video-circuitos')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Laboratório de Circuitos', true)">Abrir simulador</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="simulador" data-title="simulador geometria espacial sólidos volume área cubo prisma">
+          <div class="thumb video-thumb bg-purple" id="preview-geometria">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-geometria.jpg"><source src="videos/simulador-geometria.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="preview-object">🧊</div><div class="preview-chart"></div></div></div>
+            <div class="video-label">Prévia do simulador</div><div class="level">Geometria</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Simulador online</span></div>
+            <h3>Geometria Espacial 3D</h3>
+            <p>Explore cubos, prismas e pirâmides com rotação, planificação, cálculo de área e volume.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-geometria" placeholder="videos/simulador-geometria.mp4" /><button onclick="updateCardVideo('preview-geometria','video-geometria')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Geometria Espacial 3D', true)">Abrir simulador</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="simulador" data-title="simulador química moléculas átomos ligações molecular">
+          <div class="thumb video-thumb bg-green" id="preview-moleculas">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-moleculas.jpg"><source src="videos/simulador-moleculas.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="preview-object">🧬</div><div class="preview-chart"></div></div></div>
+            <div class="video-label">Prévia do simulador</div><div class="level">Química</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Simulador online</span></div>
+            <h3>Construtor de Moléculas</h3>
+            <p>Monte moléculas, observe ligações químicas e visualize a estrutura em 3D no navegador.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-moleculas" placeholder="videos/simulador-moleculas.mp4" /><button onclick="updateCardVideo('preview-moleculas','video-moleculas')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-blue" onclick="openSimulator('Construtor de Moléculas', true)">Abrir simulador</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" id="app-ra" data-category="app-ra" data-title="aplicativo realidade aumentada celular android apk simuladores ar geometria química física">
+          <div class="thumb video-thumb ar-preview bg-pink" id="preview-app-ra-geral">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-app-ra.jpg"><source src="videos/app-realidade-aumentada.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="ar-scan"></div><div class="ar-cube"></div></div></div>
+            <div class="video-label">Prévia do aplicativo RA</div><div class="level">App RA</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Realidade aumentada</span></div>
+            <h3>Aplicativo RA Educacional</h3>
+            <p>Baixe o app para celular e utilize cards educativos para visualizar simuladores e objetos 3D em RA.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-app-ra-geral" placeholder="videos/app-realidade-aumentada.mp4" /><button onclick="updateCardVideo('preview-app-ra-geral','video-app-ra-geral')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-orange" onclick="downloadAppAR(true)">Baixar aplicativo RA</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="app-ra" data-title="aplicativo realidade aumentada sólidos geométricos cubo prisma pirâmide">
+          <div class="thumb video-thumb ar-preview bg-purple" id="preview-app-ra-geometria">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-app-ra-geometria.jpg"><source src="videos/app-ra-geometria.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="ar-scan"></div><div class="ar-cube"></div></div></div>
+            <div class="video-label">Prévia do app RA</div><div class="level">Geometria RA</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">App RA</span></div>
+            <h3>RA Sólidos Geométricos</h3>
+            <p>Visualize sólidos geométricos sobre cards impressos, rotacione modelos e veja planificações.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-app-ra-geometria" placeholder="videos/app-ra-geometria.mp4" /><button onclick="updateCardVideo('preview-app-ra-geometria','video-app-ra-geometria')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-orange" onclick="downloadAppAR(true)">Baixar app de geometria RA</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="app-ra" data-title="aplicativo realidade aumentada moléculas química átomos cartas ar">
+          <div class="thumb video-thumb ar-preview bg-green" id="preview-app-ra-quimica">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-app-ra-quimica.jpg"><source src="videos/app-ra-quimica.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="ar-scan"></div><div class="ar-cube"></div></div></div>
+            <div class="video-label">Prévia do app RA</div><div class="level">Química RA</div>
+          </div>
+          <div class="content">
+            <div class="tag-row"><span class="tag premium">Premium</span><span class="tag">App RA</span></div>
+            <h3>RA Moléculas e Átomos</h3>
+            <p>Use cartas de elementos químicos para projetar átomos, moléculas e ligações em realidade aumentada.</p>
+            <div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-app-ra-quimica" placeholder="videos/app-ra-quimica.mp4" /><button onclick="updateCardVideo('preview-app-ra-quimica','video-app-ra-quimica')">Aplicar</button></div></div>
+            <div class="button-row"><button class="btn btn-orange" onclick="downloadAppAR(true)">Baixar app de química RA</button></div>
+          </div>
+        </article>
+
+        <article class="resource-card" data-category="powerpoint" data-title="powerpoint apresentação movimento velocidade física">
+          <div class="thumb bg-orange"><div class="thumb-emoji">📊</div><div class="level">PPT</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">PowerPoint</span></div><h3>Aula: Movimento Uniforme</h3><p>Apresentação editável com conceitos, exemplos, imagens, gráficos e proposta de atividade.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('PowerPoint Movimento Uniforme', true)">Baixar apresentação</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="pratica" data-title="atividade prática sólidos geométricos imagens moldes montar cubo prisma geometria">
+          <div class="thumb bg-purple"><div class="thumb-emoji">🧊</div><div class="level">Geometria</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Material prático</span></div><h3>Moldes de Sólidos Geométricos</h3><p>Imagens e planificações para imprimir, recortar e montar cubos, prismas e pirâmides.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('Moldes de Sólidos Geométricos', true)">Baixar imagens/moldes</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="roteiro" data-title="roteiro aula simulador plano metodologia avaliação professor">
+          <div class="thumb bg-green"><div class="thumb-emoji">📘</div><div class="level">Roteiro</div></div>
+          <div class="content"><div class="tag-row"><span class="tag free">Grátis</span><span class="tag">Plano de aula</span></div><h3>Roteiro: Aula com Simulador</h3><p>Plano de aula com objetivos, metodologia, tempo estimado, avaliação e atividade final.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Roteiro Aula com Simulador', false)">Baixar roteiro</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="video" data-title="vídeo realidade aumentada aula tecnologia educação">
+          <div class="thumb bg-green"><div class="thumb-emoji">🎬</div><div class="level">Vídeo aula</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Vídeo aula</span></div><h3>Como usar RA na escola</h3><p>Vídeo explicativo com ideias para aplicar realidade aumentada em atividades de sala de aula.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Vídeo Realidade Aumentada na Escola', true)">Assistir vídeo</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="powerpoint" data-title="powerpoint geometria espacial sólidos prismas pirâmides volume área">
+          <div class="thumb bg-orange"><div class="thumb-emoji">📐</div><div class="level">PPT</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">PowerPoint</span></div><h3>Aula: Geometria Espacial</h3><p>Slides editáveis com sólidos geométricos, fórmulas, exemplos visuais e exercícios para sala.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('PowerPoint Geometria Espacial', true)">Baixar apresentação</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="powerpoint" data-title="powerpoint química átomos moléculas ligações química ensino médio">
+          <div class="thumb bg-orange"><div class="thumb-emoji">🧪</div><div class="level">PPT</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">PowerPoint</span></div><h3>Aula: Átomos e Moléculas</h3><p>Apresentação com imagens, esquemas de ligações químicas, atividade final e perguntas guiadas.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('PowerPoint Átomos e Moléculas', true)">Baixar apresentação</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="powerpoint" data-title="powerpoint eletricidade circuitos lei de ohm resistência tensão corrente">
+          <div class="thumb bg-orange"><div class="thumb-emoji">⚡</div><div class="level">PPT</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">PowerPoint</span></div><h3>Aula: Lei de Ohm</h3><p>Slides editáveis com circuito elétrico, relação entre tensão, corrente e resistência, gráficos e exercícios.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('PowerPoint Lei de Ohm', true)">Baixar apresentação</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="pratica" data-title="atividade prática laboratório circuito elétrico pilha led resistor fios">
+          <div class="thumb bg-purple"><div class="thumb-emoji">🔋</div><div class="level">Prática</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Material prático</span></div><h3>Kit: Circuito Simples</h3><p>Roteiro visual com imagens para montar circuito com pilha, LED, resistor e fios em atividade experimental.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('Kit Circuito Simples', true)">Baixar material</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="pratica" data-title="atividade prática química moléculas cartas átomos montagem modelos moleculares">
+          <div class="thumb bg-purple"><div class="thumb-emoji">🧬</div><div class="level">Prática</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Material prático</span></div><h3>Cartas para Montar Moléculas</h3><p>Cartas de átomos, ligações e desafios para os alunos criarem moléculas em grupos.</p><div class="button-row"><button class="btn btn-orange" onclick="downloadResource('Cartas para Montar Moléculas', true)">Baixar cartas</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="pratica" data-title="atividade prática matemática frações porcentagem dominó jogo pedagógico">
+          <div class="thumb bg-purple"><div class="thumb-emoji">🎲</div><div class="level">Prática</div></div>
+          <div class="content"><div class="tag-row"><span class="tag free">Grátis</span><span class="tag">Material prático</span></div><h3>Dominó de Frações</h3><p>Jogo pedagógico para imprimir e trabalhar equivalência, comparação e representação de frações.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Dominó de Frações', false)">Baixar jogo</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="video" data-title="vídeo aula movimento uniforme velocidade física gráficos">
+          <div class="thumb bg-green"><div class="thumb-emoji">🎥</div><div class="level">Vídeo aula</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Vídeo aula</span></div><h3>Vídeo aula: Movimento Uniforme</h3><p>Explicação guiada com exemplos de posição, tempo, velocidade média e leitura de gráficos.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Vídeo aula Movimento Uniforme', true)">Assistir vídeo aula</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="video" data-title="vídeo aula geometria espacial volume área sólidos geométricos">
+          <div class="thumb bg-green"><div class="thumb-emoji">📹</div><div class="level">Vídeo aula</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Vídeo aula</span></div><h3>Vídeo aula: Sólidos Geométricos</h3><p>Aula em vídeo mostrando planificação, volume, área total e exemplos com objetos do cotidiano.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Vídeo aula Sólidos Geométricos', true)">Assistir vídeo aula</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="video" data-title="vídeo aula programação javascript crud node express api">
+          <div class="thumb bg-green"><div class="thumb-emoji">💻</div><div class="level">Vídeo aula</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Vídeo aula</span></div><h3>Vídeo aula: CRUD com Node.js</h3><p>Passo a passo em vídeo criando cadastro, listagem, atualização e exclusão com Express.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Vídeo aula CRUD com Node.js', true)">Assistir vídeo aula</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="roteiro" data-title="roteiro aula geometria espacial sólidos metodologia avaliação bncc">
+          <div class="thumb bg-green"><div class="thumb-emoji">📗</div><div class="level">Roteiro</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Plano de aula</span></div><h3>Roteiro: Sólidos Geométricos</h3><p>Sequência didática com abertura, investigação, montagem de sólidos, socialização e avaliação.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Roteiro Sólidos Geométricos', true)">Baixar roteiro</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="roteiro" data-title="roteiro aula lei de ohm eletricidade simulador investigação experimento">
+          <div class="thumb bg-green"><div class="thumb-emoji">📙</div><div class="level">Roteiro</div></div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">Plano de aula</span></div><h3>Roteiro: Lei de Ohm com Simulador</h3><p>Plano com problema inicial, uso do simulador, coleta de dados, tabela e discussão dos resultados.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Roteiro Lei de Ohm com Simulador', true)">Baixar roteiro</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="roteiro" data-title="roteiro aula realidade aumentada educação tecnologia prática professor">
+          <div class="thumb bg-green"><div class="thumb-emoji">📒</div><div class="level">Roteiro</div></div>
+          <div class="content"><div class="tag-row"><span class="tag free">Grátis</span><span class="tag">Plano de aula</span></div><h3>Roteiro: Introdução à Realidade Aumentada</h3><p>Atividade para apresentar RA aos alunos, com objetivos, orientações e proposta de registro no caderno.</p><div class="button-row"><button class="btn btn-blue" onclick="downloadResource('Roteiro Introdução à Realidade Aumentada', false)">Baixar roteiro</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="app-ra" data-title="aplicativo realidade aumentada astronomia planetas sistema solar cartas ar">
+          <div class="thumb video-thumb ar-preview bg-blue" id="preview-app-ra-astronomia">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-app-ra-astronomia.jpg"><source src="videos/app-ra-astronomia.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="ar-scan"></div><div class="ar-cube"></div></div></div>
+            <div class="video-label">Prévia do app RA</div><div class="level">Astronomia RA</div>
+          </div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">App RA</span></div><h3>RA Sistema Solar</h3><p>Aplicativo para visualizar planetas, órbitas e informações astronômicas usando cards colecionáveis.</p><div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-app-ra-astronomia" placeholder="videos/app-ra-astronomia.mp4" /><button onclick="updateCardVideo('preview-app-ra-astronomia','video-app-ra-astronomia')">Aplicar</button></div></div><div class="button-row"><button class="btn btn-orange" onclick="downloadAppAR(true)">Baixar app de astronomia RA</button></div></div>
+        </article>
+
+        <article class="resource-card" data-category="app-ra" data-title="aplicativo realidade aumentada corpo humano órgãos anatomia biologia ar">
+          <div class="thumb video-thumb ar-preview bg-pink" id="preview-app-ra-biologia">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/poster-app-ra-biologia.jpg"><source src="videos/app-ra-biologia.mp4" type="video/mp4" /></video>
+            <div class="video-fallback"><div class="preview-scene"><div class="ar-scan"></div><div class="ar-cube"></div></div></div>
+            <div class="video-label">Prévia do app RA</div><div class="level">Biologia RA</div>
+          </div>
+          <div class="content"><div class="tag-row"><span class="tag premium">Premium</span><span class="tag">App RA</span></div><h3>RA Corpo Humano</h3><p>Aplicativo para projetar órgãos, sistemas do corpo humano e modelos 3D em realidade aumentada.</p><div class="video-url-box"><label>Inserir vídeo de prévia</label><div><input type="text" id="video-app-ra-biologia" placeholder="videos/app-ra-biologia.mp4" /><button onclick="updateCardVideo('preview-app-ra-biologia','video-app-ra-biologia')">Aplicar</button></div></div><div class="button-row"><button class="btn btn-orange" onclick="downloadAppAR(true)">Baixar app de biologia RA</button></div></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="professores">
+      <div class="teacher-area">
+        <div>
+          <h2>Área do professor assinante</h2>
+          <p>
+            O professor pode acessar simuladores hospedados no site, baixar apresentações em PowerPoint,
+            materiais para atividades práticas, imagens para impressão, roteiros completos e vídeo aulas explicativas.
+            A plataforma pode monetizar por assinatura mensal, plano escolar ou venda avulsa de pacotes didáticos.
+          </p>
+        </div>
+
+        <div class="login-box" id="login">
+          <h3 style="margin-bottom: 16px; color: var(--blue-dark);">Simular acesso premium</h3>
+          <input type="email" id="email" placeholder="E-mail do professor" />
+          <input type="password" id="senha" placeholder="Senha" />
+          <button class="btn btn-blue" onclick="loginUser()">Entrar como assinante</button>
+          <button class="btn btn-light" onclick="logoutUser()" style="margin-top: 10px;">Sair</button>
+          <div class="status" id="loginStatus"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans" id="planos">
+      <div class="section-title">
+        <h2>Planos de acesso</h2>
+        <p>Libere simuladores, downloads e materiais premium por assinatura.</p>
+      </div>
+
+      <div class="cards">
+        <div class="plan-card">
+          <h3>Gratuito</h3>
+          <div class="price">R$ 0</div>
+          <p>Para conhecer a plataforma</p>
+          <ul>
+            <li>✔ Alguns roteiros gratuitos</li>
+            <li>✔ Prévia dos simuladores</li>
+            <li>✔ Dicas pedagógicas</li>
+            <li>✖ Downloads premium</li>
+          </ul>
+          <button class="btn btn-light">Começar grátis</button>
+        </div>
+
+        <div class="plan-card featured">
+          <div class="popular">Mais indicado</div>
+          <h3>Professor Pro</h3>
+          <div class="price">R$ 29,90/mês</div>
+          <p>Para professores que querem aulas prontas</p>
+          <ul>
+            <li>✔ Simuladores online ilimitados</li>
+            <li>✔ Apresentações PowerPoint</li>
+            <li>✔ Moldes e imagens para atividades</li>
+            <li>✔ Vídeo aulas e roteiros completos</li>
+          </ul>
+          <button class="btn btn-orange" onclick="subscribe()">Assinar agora</button>
+        </div>
+
+        <div class="plan-card">
+          <h3>Escola</h3>
+          <div class="price">R$ 149,90/mês</div>
+          <p>Para coordenações e equipes pedagógicas</p>
+          <ul>
+            <li>✔ Acesso para vários professores</li>
+            <li>✔ Painel de gestão</li>
+            <li>✔ Pacotes por disciplina</li>
+            <li>✔ Suporte pedagógico</li>
+          </ul>
+          <button class="btn btn-blue">Solicitar proposta</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h2>Didatika Hub</h2>
+    <p>Simuladores web, PowerPoints, vídeo aulas, roteiros e materiais práticos para professores.</p>
+    <p>© 2026 - Projeto demonstrativo em HTML, CSS e JavaScript</p>
+  </footer>
+
+  <script>
+    let isSubscriber = false;
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterCards(category, button) {
+      const cards = document.querySelectorAll('.resource-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      if (button && button.classList.contains('filter-btn')) {
+        button.classList.add('active');
+      }
+
+      cards.forEach(card => {
+        if (category === 'todos' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('biblioteca').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function searchResources() {
+      const term = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.resource-card');
+
+      cards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const text = card.innerText.toLowerCase();
+
+        if (title.includes(term) || text.includes(term)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function loginUser() {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const status = document.getElementById('loginStatus');
+
+      if (email === '' || senha === '') {
+        status.style.display = 'block';
+        status.style.background = '#fee2e2';
+        status.style.color = '#991b1b';
+        status.innerText = 'Preencha e-mail e senha para simular o acesso.';
+        return;
+      }
+
+      isSubscriber = true;
+      localStorage.setItem('assinante', 'sim');
+
+      status.style.display = 'block';
+      status.style.background = '#dcfce7';
+      status.style.color = '#166534';
+      status.innerText = 'Acesso premium liberado. Você pode abrir simuladores e baixar materiais pagos.';
+    }
+
+    function logoutUser() {
+      isSubscriber = false;
+      localStorage.removeItem('assinante');
+
+      const status = document.getElementById('loginStatus');
+      status.style.display = 'block';
+      status.style.background = '#dbeafe';
+      status.style.color = '#0b2f6b';
+      status.innerText = 'Você saiu da conta premium.';
+    }
+
+    function subscribe() {
+      alert('Em uma versão real, este botão abriria o pagamento via Mercado Pago, Stripe, PagSeguro, Hotmart ou outro gateway.');
+    }
+
+    function checkAccess(premium) {
+      const savedSubscriber = localStorage.getItem('assinante') === 'sim';
+
+      if (premium && !isSubscriber && !savedSubscriber) {
+        alert('Este recurso é premium. Faça login como assinante ou escolha um plano para liberar o acesso.');
+        scrollToSection('planos');
+        return false;
+      }
+
+      return true;
+    }
+
+    function openSimulator(resourceName, premium) {
+      if (!checkAccess(premium)) return;
+
+      alert('Abrindo simulador online: ' + resourceName + '. Em uma versão real, este botão levaria para a página do aplicativo web hospedado no site.');
+    }
+
+    function downloadResource(resourceName, premium) {
+      if (!checkAccess(premium)) return;
+
+      alert('Download liberado: ' + resourceName + '. Em uma versão real, o arquivo PPTX, PDF, imagem ou vídeo seria entregue aqui.');
+    }
+
+    function downloadAppAR(premium) {
+      if (!checkAccess(premium)) return;
+
+      alert('Download do aplicativo RA liberado. Em uma versão real, este botão baixaria o APK ou abriria a loja Google Play/App Store.');
+
+      // Exemplo real para APK:
+      // window.location.href = 'downloads/didatika-ra.apk';
+
+      // Exemplo real para loja:
+      // window.open('https://play.google.com/store/apps/details?id=br.com.didatikahub.ra', '_blank');
+    }
+
+
+    function updateCardVideo(previewId, inputId) {
+      const preview = document.getElementById(previewId);
+      const input = document.getElementById(inputId);
+
+      if (!preview || !input) return;
+
+      const videoUrl = input.value.trim();
+      if (videoUrl === '') {
+        alert('Digite o caminho do vídeo. Exemplo: videos/meu-video.mp4');
+        return;
+      }
+
+      const oldVideo = preview.querySelector('video');
+      const newVideo = document.createElement('video');
+      newVideo.autoplay = true;
+      newVideo.muted = true;
+      newVideo.loop = true;
+      newVideo.playsInline = true;
+      newVideo.preload = 'metadata';
+      newVideo.innerHTML = `<source src="${videoUrl}" type="video/mp4" />`;
+      newVideo.addEventListener('error', () => newVideo.classList.add('video-error'));
+
+      if (oldVideo) {
+        oldVideo.replaceWith(newVideo);
+      } else {
+        preview.prepend(newVideo);
+      }
+
+      newVideo.load();
+      newVideo.play().catch(() => {});
+      alert('Vídeo aplicado ao card. Para funcionar no site publicado, o arquivo precisa existir nesse caminho.');
+    }
+
+    window.onload = function () {
+      document.querySelectorAll('.video-thumb video').forEach(video => {
+        video.addEventListener('error', () => video.classList.add('video-error'));
+        video.querySelectorAll('source').forEach(source => {
+          source.addEventListener('error', () => video.classList.add('video-error'));
+        });
+      });
+
+      if (localStorage.getItem('assinante') === 'sim') {
+        isSubscriber = true;
+        const status = document.getElementById('loginStatus');
+        status.style.display = 'block';
+        status.style.background = '#dcfce7';
+        status.style.color = '#166534';
+        status.innerText = 'Você já está logado como assinante neste navegador.';
+      }
+    };
+  </script>
+</body>
+</html>
